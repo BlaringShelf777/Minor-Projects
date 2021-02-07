@@ -3,6 +3,7 @@
 #include <math.h>
 #include <time.h>
 #include <string.h>
+#include <inttypes.h>
 
 #define CPFSIZE 11
 
@@ -11,14 +12,21 @@ void printfCpf(char *cpf);
 int validCpf(char *cpf);
 
 int main(){
-    // char *cpf = createRandCpf(CPFSIZE);
-    // printfCpf(cpf);
-    // free(cpf);
+    char *cpf = NULL;
+    int flag = 0;
+    unsigned long long int counter  = 0;
 
-    if (validCpf("04049223090"))
-        printf("VALID");
-    else 
-        printf("NOT");
+    while (!flag){
+        cpf = createRandCpf(CPFSIZE);
+        if (validCpf(cpf)){
+            printfCpf(cpf);
+            flag = 1;
+        }
+        free (cpf);
+        counter++;
+    }
+
+    printf("\n Tries: %llu", counter);
 
     return 0;
 }
@@ -51,6 +59,7 @@ void printfCpf(char *cpf){
             break;
         }
     }
+    printf("\n");
 }
 
 int validCpf(char *cpf){
