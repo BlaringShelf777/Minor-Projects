@@ -13,11 +13,25 @@ char *createCpf();
 
 int main(){
     char *cpf = createCpf();
+    int flag = 0;
     
+    // By Algorithm
     if (validCpf(cpf))
         printfCpf(cpf);
     else
-        printf("Invalid CPF.");
+        printf("Invalid CPF.\n");
+    free(cpf);
+    // Randomly
+    printf("\n Creating CPF randomly . . .\n");
+    while (!flag){
+        cpf = createRandCpf(CPFSIZE);
+        if (validCpf(cpf)){
+            printfCpf(cpf);
+            flag = 1;
+        }
+        free(cpf);
+    }
+
 
     return 0;
 }
