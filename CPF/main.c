@@ -14,7 +14,7 @@ char *createCpf();
 int main(){
     char *cpf = createCpf();
     
-    if (validCpf("04049223090"))
+    if (validCpf(cpf))
         printfCpf(cpf);
     else
         printf("Invalid CPF.");
@@ -79,15 +79,13 @@ char *createCpf(){
     for (int i = 0, j = 10; i < 9; i++){
         cpf[i] = '0' + rand() % 10;
         dig1 += (cpf[i] - '0') * j;
+        dig2 += (cpf[i] - '0') * (j + 1);
         j--;
     }
     dig1 = (dig1 * 10) % 11; dig1 = dig1 == 10 ? 0 : dig1;
     cpf[9] = '0' + dig1;
-    // Creates the last digit
-    for (int i = 0, j = 11; i < 10; i++){
-        dig2 += (cpf[i] - '0') * j;
-        j--;
-    }
+    // Creates the last DIgit
+    dig2 += dig1 * 2;
     dig2 = (dig2 * 10) % 11; dig2 = dig2 == 10 ? 0 : dig2;
     cpf[10] = '0' + dig2;
 
