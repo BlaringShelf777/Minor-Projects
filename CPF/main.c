@@ -22,8 +22,7 @@ int main(){
     return 0;
 }
 
-// Create CPF:
-
+// Creates a CPF randomly:
 char *createRandCpf(int size){
     char *cpf = (char *) malloc(sizeof(char) * (size + 1));
 
@@ -34,6 +33,7 @@ char *createRandCpf(int size){
     return cpf;
 }
 
+// Prints a CPF with format
 void printfCpf(char *cpf){
     // Prints a standard CPF format: xxx.xxx.xxx-xx
     for (int i = 0; i < CPFSIZE; i++){
@@ -53,6 +53,7 @@ void printfCpf(char *cpf){
     printf("\n");
 }
 
+// Validates a CPF
 int validCpf(char *cpf){
     int dig1 = 0, dig2 = 0;
 
@@ -68,10 +69,12 @@ int validCpf(char *cpf){
     return cpf[9] - '0' == dig1 && cpf[10] - '0' == dig2;
 }
 
+// Creates a CPF by an algorithm 
 char *createCpf(){
     char *cpf = (char *) malloc(sizeof(char) * (CPFSIZE + 1));
     int dig1 = 0, dig2 = 0;
 
+    //creates the CPF's 10 firt digits
     srand(time(NULL));
     for (int i = 0, j = 10; i < 9; i++){
         cpf[i] = '0' + rand() % 10;
@@ -80,6 +83,7 @@ char *createCpf(){
     }
     dig1 = (dig1 * 10) % 11; dig1 = dig1 == 10 ? 0 : dig1;
     cpf[9] = '0' + dig1;
+    // Creates the last digit
     for (int i = 0, j = 11; i < 10; i++){
         dig2 += (cpf[i] - '0') * j;
         j--;
